@@ -3,21 +3,17 @@
 import { Button, Col, Form, Row} from "react-bootstrap"
 import InputGroup from 'react-bootstrap/InputGroup';
 import Card from 'react-bootstrap/Card';
-import { DishesScreen } from "../dishes/dishesScreen";
+
 import { useState } from "react";
+import { CategoryScreen } from "./categoryScreen";
+import categoryList from "../repository/categories";
 
 
 
 function HomeScreen() {
 
-  const categoryList2=["Блюда","Бар","Холодный","Десерт","Хлеб и Чай"];
-  const categoryList=[
-    {name:"Блюда",view:<DishesScreen></DishesScreen>},
-    {name:"Бар"},
-    {name:"Холодный"},
-    {name:"Десерт"},
-    {name:"Хлеб и Чай"}
-  ];
+  
+  
 
   const [active,setActive]=useState(0);
   
@@ -43,12 +39,11 @@ function HomeScreen() {
           </div>
 
 
-            <Row className="row-cols-auto mt-4 g-2">
-               
+            <Row className="row-cols-auto mt-4 g-2">               
                {
                 categoryList.map((item,index)=>(
                    <Col><button  
-                  onClick={()=>{setActive(index)}}
+                   onClick={()=>{setActive(index)}}
                    className={`btn btn${index==active ? ``:`-outline`}-secondary border-2`}>{item.name}                  
                    
                    </button></Col>
@@ -67,7 +62,9 @@ function HomeScreen() {
 
 
          
-          {categoryList[active].view}
+          {
+            <CategoryScreen category={categoryList[active]}></CategoryScreen>
+          }
 
 
 
