@@ -42,9 +42,10 @@ function HomeScreen() {
             <Row className="row-cols-auto mt-4 g-2">               
                {
                 categoryList.map((item,index)=>(
-                   <Col><button  
+                   <Col>
+                   <button  
                    onClick={()=>{setActive(index)}}
-                   className={`btn btn${index==active ? ``:`-outline`}-secondary border-2`}>{item.name}                  
+                   className={`btn btn${index==active ? ``:`-outline`}-secondary border-2 py-1`}>{item.name}                  
                    
                    </button></Col>
                 ))

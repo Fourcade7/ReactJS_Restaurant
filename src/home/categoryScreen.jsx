@@ -1,18 +1,26 @@
 
 
+import { useState } from "react"
 import { Button, Col, Form, Row, Card} from "react-bootstrap"
 
 
 
 function CategoryScreen(props){
 
+  const [layout,setLayout]=useState(true);
+
 
     return(
-        <div>          
+        <div>     
+
+            <div className="d-flex">
+              <img
+               onClick={()=>setLayout(!layout)}
+               className="mt-3 ms-auto" type="button" src={`/src/assets/${layout ? `grid` : `list`}.png`} width={25} height={25} alt=""
+               ></img>
+              </div>     
          
-             <Row className="row-cols-2 mt-4 g-2">
-
-
+             <Row className={`row-cols-${layout ? `2` : `1`} mt-1 g-2`}>
               {
                 props.category.foodsList.map((item)=>(
                   <Col>
@@ -24,7 +32,7 @@ function CategoryScreen(props){
                           <small>{item.smallFoods}</small>
                         </Card.Text>
                         <div className="mt-auto d-grid">
-                         <Button variant="primary">Показать</Button>
+                         <Button  variant="secondary" >Показать</Button>
                         </div>
                       </Card.Body>
                   </Card>
