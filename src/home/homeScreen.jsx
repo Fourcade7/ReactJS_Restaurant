@@ -6,7 +6,9 @@ import Card from 'react-bootstrap/Card';
 
 import { useState } from "react";
 import { CategoryScreen } from "./categoryScreen";
-import categoryList from "../repository/categories";
+import categoryList from "../repository/categoriesRepository";
+import { FoodsScreen } from "../foodScreen/foodsScreen";
+import childFoodsList from "../repository/foodsRepository";
 
 
 
@@ -62,10 +64,13 @@ function HomeScreen() {
             </InputGroup>
 
 
+          <FoodsScreen childFoodList={childFoodsList}></FoodsScreen>     
          
           {
             <CategoryScreen category={categoryList[active]}></CategoryScreen>
           }
+
+
 
 
 

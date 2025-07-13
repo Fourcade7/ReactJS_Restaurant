@@ -33,8 +33,6 @@
         {title:"Кофе",image:"src/assets/coffe.jpg",smallFoods:"Cappuccino, Романо, Раф, Ice coffe, Американо, Frappe, Mokko, Latte."},
       ]
     },
-
-
     {
       name:"Хододный",
       foodsList:[
@@ -57,6 +55,10 @@
     }
     
   ];
+
+
+
+  
 
 
     export default categoryList;

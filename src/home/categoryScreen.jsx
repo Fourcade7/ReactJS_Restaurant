@@ -16,7 +16,7 @@ function CategoryScreen(props){
             <div className="d-flex">
               <img
                onClick={()=>setLayout(!layout)}
-               className="mt-3 ms-auto" type="button" src={`/src/assets/${layout ? `grid` : `list`}.png`} width={25} height={25} alt=""
+               className="mt-3 ms-auto" type="button" src={`/src/assets/${layout ? `menu` : `grid`}.png`} width={24} height={24} alt=""
                ></img>
               </div>     
          
@@ -38,11 +38,7 @@ function CategoryScreen(props){
                   </Card>
                </Col>
                 ))
-              }
-               
-
-
-               
+              }   
             </Row>
           
         </div>
