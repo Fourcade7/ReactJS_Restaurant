@@ -9,10 +9,11 @@ import { useState } from "react";
 function FoodsScreen(props){
 
     const [childFoodsList,setChildFoodsList]=useState(props.childFoodList)
+   
 
     return(
         <div className="mt-4">
-            <Row className="row-cols-1">
+            <Row className="row-cols-2">
                {
                 childFoodsList.map((item,index) =>(
 
@@ -38,27 +39,22 @@ function FoodsScreen(props){
                                 </Col>
 
                             </Row>                            
-                            {item.visible ? (
+                            {childFoodsList[index].visible ? (
                                 <Row className="align-items-center justify-content-center">
                                     <Col className="d-grid">
                                     <Button
                                      onClick={()=>{
-                                        const updatedList = [...childFoodsList];
-                                            if(updatedList[index].count>0){
-                                                updatedList[index].count -=1;
-                                            }                                            
-                                            setChildFoodsList(updatedList);
-                                        }}
+                                        props.clickableMinus(index);
+                                        if(childFoodsList[index].count==0){
+                                            childFoodsList[index].visible=false;
+                                        }
+                                    }}
                                     variant="outline-secondary" ><img src="/src/assets/minus.png" width={20} height={20} alt="" /></Button>
                                     </Col>
                                     <Col className="col-1 d-flex justify-content-center "><h3 className="my-auto">{item.count}</h3></Col>
                                      <Col className="d-grid">
                                     <Button  
-                                     onClick={()=>{
-                                        const updatedList = [...childFoodsList];
-                                            updatedList[index].count +=1;
-                                            setChildFoodsList(updatedList);
-                                        }}
+                                     onClick={()=>{props.clickablePlus(index)}}
                                     variant="outline-secondary" ><img src="/src/assets/add.png" width={20} height={20} alt="" /></Button>
                                     </Col>
                               </Row>

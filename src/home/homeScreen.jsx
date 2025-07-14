@@ -18,6 +18,8 @@ function HomeScreen() {
   
 
   const [active,setActive]=useState(0);
+  const [childFoodList,setChildFoodList]=useState(childFoodsList)
+
   
 
   return (
@@ -64,7 +66,22 @@ function HomeScreen() {
             </InputGroup>
 
 
-          <FoodsScreen childFoodList={childFoodsList}></FoodsScreen>     
+          <FoodsScreen 
+          clickablePlus={(index)=>{
+            const updatedList=[...childFoodList];
+              updatedList[index].count+=1;
+              setChildFoodList(updatedList);
+
+          }}
+
+          clickableMinus={(index)=>{
+            const updatedList=[...childFoodList];
+              updatedList[index].count-=1;
+              setChildFoodList(updatedList);
+
+          }}
+          
+          childFoodList={childFoodList}></FoodsScreen>     
          
           {
             <CategoryScreen category={categoryList[active]}></CategoryScreen>
