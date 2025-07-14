@@ -18,13 +18,14 @@ function HomeScreen() {
   
 
   const [active,setActive]=useState(0);
-  const [childFoodList,setChildFoodList]=useState(childFoodsList)
+  const [childFoodList,setChildFoodList]=useState(childFoodsList);
+  const [categoryName,setCategoryName]=useState("");
 
   
 
   return (
     <div   className="container d-flex  align-items-center justify-content-center">
-       <div  style={{ width: "500px" }}>
+       <div  style={{ width: "450px" }}>
          <img src="/src/assets/mainimage.png" class="img-fluid w-100" alt="..."></img>
          
          <div className="py-5 px-3 rounded rounded-top-5" style={{marginTop:-25, backgroundColor: "#181818"}}>
@@ -48,7 +49,11 @@ function HomeScreen() {
                 categoryList.map((item,index)=>(
                    <Col>
                    <button  
-                   onClick={()=>{setActive(index)}}
+                   onClick={()=>{
+                    setActive(index);
+                    setCategoryName("");
+                    setChildFoodList(childFoodsList);
+                  }}
                    className={`btn btn${index==active ? ``:`-outline`}-secondary border-2 py-1`}>{item.name}                  
                    
                    </button></Col>
@@ -66,27 +71,37 @@ function HomeScreen() {
             </InputGroup>
 
 
+          {categoryName ? 
           <FoodsScreen 
-          clickablePlus={(index)=>{
-            const updatedList=[...childFoodList];
-              updatedList[index].count+=1;
-              setChildFoodList(updatedList);
+                clickablePlus={(index)=>{
+                  const updatedList=[...childFoodList];
+                    updatedList[index].count+=1;
+                    setChildFoodList(updatedList);
 
-          }}
+                }}
 
-          clickableMinus={(index)=>{
-            const updatedList=[...childFoodList];
-              updatedList[index].count-=1;
-              setChildFoodList(updatedList);
+                clickableMinus={(index)=>{
+                  const updatedList=[...childFoodList];
+                    updatedList[index].count-=1;
+                    setChildFoodList(updatedList);
 
-          }}
+                }}
           
-          childFoodList={childFoodList}></FoodsScreen>     
-         
-          {
-            <CategoryScreen category={categoryList[active]}></CategoryScreen>
-          }
+               childFoodList={childFoodList}>
+           </FoodsScreen>   
+           :
+            <CategoryScreen 
+            clickable={(categoryname)=>{
+              console.log(categoryname);
+              setCategoryName(categoryname);
+              setChildFoodList(childFoodList.filter(item=> (item.categoryName==categoryname)));
 
+            }}
+            category={categoryList[active]}>              
+           </CategoryScreen>  
+         }
+          
+        
 
 
 

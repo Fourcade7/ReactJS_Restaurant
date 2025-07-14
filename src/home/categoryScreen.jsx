@@ -32,7 +32,10 @@ function CategoryScreen(props){
                           <small>{item.smallFoods}</small>
                         </Card.Text>
                         <div className="mt-auto d-grid">
-                         <Button  variant="secondary" >Показать</Button>
+                         <Button 
+                         onClick={()=>{props.clickable(item.title)}}
+                         variant="outline-secondary"
+                         >Показать</Button>
                         </div>
                       </Card.Body>
                   </Card>
