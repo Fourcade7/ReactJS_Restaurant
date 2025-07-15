@@ -1,33 +1,66 @@
 
 
 
-
-
-
-
-const childFoodsList=[
-
-    {
-        categoryName:"Европа Таомлар",
-        name:"Лидер Микс",
-        image:"/src/assets/lidermix.jpeg",
-        price:"350000",
-        time:"20 мин",
-        visible:false,
-        count:0
-    },
-    {
-        categoryName:"Европа Таомлар",
-        name:"Мангал Ассорти",
-        image:"/src/assets/mangalassorti.jpg",
-        price:"350000",
-        time:"20 мин",
-        visible:false,
-        count:0
-    }
-
-
-]
-
+const childFoodsList = [
+  { id: 0, categoryName: "Европа Таомлар", name: "Лидер Микс", image: "/src/assets/lidermix.jpeg", price: "350000", time: "20 мин", visible: false, count: 0 },
+  { id: 1, categoryName: "Европа Таомлар", name: "Мангал Ассорти", image: "/src/assets/mangalassorti.jpg", price: "350000", time: "20 мин", visible: false, count: 0 },
+  { id: 2, categoryName: "Европа Таомлар", name: "Шеф ассорти", image: "/src/assets/shefassorti.jpeg", price: "499000", time: "20 мин", visible: false, count: 0 },
+  { id: 3, categoryName: "Европа Таомлар", name: "Асадо", image: "/src/assets/asado.jpeg", price: "170000", time: "20 мин", visible: false, count: 0 },
+  { id: 4, categoryName: "Европа Таомлар", name: "Микс ассорти", image: "/src/assets/miksassorti.jpeg", price: "299000", time: "20 мин", visible: false, count: 0 },
+  { id: 5, categoryName: "Европа Таомлар", name: "Колбасные ассорти", image: "/src/assets/kolbasniyassorti.jpeg", price: "175000", time: "20 мин", visible: false, count: 0 },
+  { id: 6, categoryName: "Европа Таомлар", name: "Мини Мих Ассорти", image: "/src/assets/minimiksassorti.jpeg", price: "190000", time: "20 мин", visible: false, count: 0 },
+  { id: 7, categoryName: "Европа Таомлар", name: "Котлет сырный", image: "/src/assets/kotletsirniy.jpeg", price: "54000", time: "20 мин", visible: false, count: 0 },
+  { id: 8, categoryName: "Европа Таомлар", name: "Чизбургер", image: "/src/assets/chizburger.jpeg", price: "41000", time: "20 мин", visible: false, count: 0 },
+  { id: 9, categoryName: "Европа Таомлар", name: "Котлеты с пюре", image: "/src/assets/kotletspyure.jpeg", price: "55000", time: "20 мин", visible: false, count: 0 },
+  { id: 10, categoryName: "Европа Таомлар", name: "Лидер лаваш", image: "/src/assets/liderlavash.jpeg", price: "58000", time: "20 мин", visible: false, count: 0 },
+  { id: 11, categoryName: "Миллий Таомлар", name: "Голубси порция", image: "/src/assets/golubsiportsiya.jpeg", price: "35000", time: "20 мин", visible: false, count: 0 },
+  { id: 12, categoryName: "Миллий Таомлар", name: "Казан Кебаб", image: "/src/assets/kazankebab.jpeg", price: "99000", time: "20 мин", visible: false, count: 0 },
+  { id: 13, categoryName: "Миллий Таомлар", name: "Кебаб Ассорти", image: "/src/assets/kebabassorti.jpeg", price: "330000", time: "20 мин", visible: false, count: 0 },
+  { id: 14, categoryName: "Миллий Таомлар", name: "Миллий Асоорти", image: "/src/assets/milliyassorti.jpeg", price: "280000", time: "20 мин", visible: false, count: 0 },
+  { id: 15, categoryName: "Миллий Таомлар", name: "Люля кебаб", image: "/src/assets/lyulyakebab.jpeg", price: "54000", time: "20 мин", visible: false, count: 0 },
+  { id: 16, categoryName: "Миллий Таомлар", name: "Ковурма лагман", image: "/src/assets/kovurmalagman.jpeg", price: "38000", time: "20 мин", visible: false, count: 0 },
+  { id: 17, categoryName: "Миллий Таомлар", name: "Сарёга товук", image: "/src/assets/saryagatovuq.jpeg", price: "75000", time: "20 мин", visible: false, count: 0 },
+  { id: 18, categoryName: "Миллий Таомлар", name: "Уйгур лагмон", image: "/src/assets/uygurlagman.jpeg", price: "38000", time: "20 мин", visible: false, count: 0 },
+  { id: 19, categoryName: "Миллий Таомлар", name: "Жареный пельмень", image: "/src/assets/jarenniypelmen.jpeg", price: "25000", time: "20 мин", visible: false, count: 0 },
+  { id: 20, categoryName: "Миллий Таомлар", name: "Шур кабоб", image: "/src/assets/shurkabob.jpeg", price: "125000", time: "20 мин", visible: false, count: 0 },
+  { id: 21, categoryName: "Миллий Таомлар", name: "Язык в сливочном масле", image: "/src/assets/yazikvslivochnommasle.jpeg", price: "99000", time: "20 мин", visible: false, count: 0 },
+  { id: 22, categoryName: "Миллий Таомлар", name: "Гушт сай", image: "/src/assets/gushtsay.jpeg", price: "57000", time: "20 мин", visible: false, count: 0 },
+  { id: 23, categoryName: "Миллий Таомлар", name: "Жизз", image: "/src/assets/jizza.jpeg", price: "125000", time: "20 мин", visible: false, count: 0 },
+  { id: 24, categoryName: "Суюк Овкатлар", name: "Ун оши", image: "/src/assets/unoshi.jpeg", price: "22000", time: "20 мин", visible: false, count: 0 },
+  { id: 25, categoryName: "Суюк Овкатлар", name: "Тефтел шурва", image: "/src/assets/teftelshurva.jpeg", price: "24000", time: "20 мин", visible: false, count: 0 },
+  { id: 26, categoryName: "Суюк Овкатлар", name: "Осма шурва", image: "/src/assets/osmashurva.jpeg", price: "25000", time: "20 мин", visible: false, count: 0 },
+  { id: 27, categoryName: "Суюк Овкатлар", name: "Мастава", image: "/src/assets/mastava.jpeg", price: "25000", time: "20 мин", visible: false, count: 0 },
+  { id: 28, categoryName: "Суюк Овкатлар", name: "Борщ", image: "/src/assets/borsh.jpeg", price: "23000", time: "20 мин", visible: false, count: 0 },
+  { id: 29, categoryName: "Хамир Овкатлар", name: "Манты порция", image: "/src/assets/mantiportsiya.jpeg", price: "50000", time: "20 мин", visible: false, count: 0 },
+  { id: 30, categoryName: "Хамир Овкатлар", name: "Капширма", image: "/src/assets/kapshirma.jpeg", price: "12000", time: "20 мин", visible: false, count: 0 },
+  { id: 31, categoryName: "Хамир Овкатлар", name: "Патир сомса", image: "/src/assets/patirsomsa.jpeg", price: "13000", time: "20 мин", visible: false, count: 0 },
+  { id: 32, categoryName: "Хамир Овкатлар", name: "Турк сомса", image: "/src/assets/turksomsa.jpeg", price: "6000", time: "20 мин", visible: false, count: 0 },
+  { id: 33, categoryName: "Хамир Овкатлар", name: "Тухум барак", image: "/src/assets/tuxumbarak.jpeg", price: "29000", time: "20 мин", visible: false, count: 0 },
+  { id: 34, categoryName: "Хамир Овкатлар", name: "Кук барак", image: "/src/assets/kukbarak.jpeg", price: "24000", time: "20 мин", visible: false, count: 0 },
+  { id: 35, categoryName: "Хамир Овкатлар", name: "Котир барак", image: "/src/assets/kotirbarak.jpeg", price: "35000", time: "20 мин", visible: false, count: 0 },
+  { id: 36, categoryName: "Хамир Овкатлар", name: "Кади барак", image: "/src/assets/kadibarak.jpeg", price: "24000", time: "20 мин", visible: false, count: 0 },
+  { id: 37, categoryName: "Хамир Овкатлар", name: "Манты", image: "/src/assets/manti.jpeg", price: "250000", time: "20 мин", visible: false, count: 0 },
+  { id: 38, categoryName: "Хамир Овкатлар", name: "Барак ассорти", image: "/src/assets/barakassorti.jpeg", price: "120000", time: "20 мин", visible: false, count: 0 },
+  { id: 39, categoryName: "Витрина", name: "Фланг", image: "/src/assets/tbonebaranina.jpg", price: "100000", time: "20 мин", visible: false, count: 0 },
+  { id: 40, categoryName: "Витрина", name: "Рибай", image: "/src/assets/tbonebaranina.jpg", price: "99000", time: "20 мин", visible: false, count: 0 },
+  { id: 41, categoryName: "Витрина", name: "Медальон", image: "/src/assets/tbonebaranina.jpg", price: "100000", time: "20 мин", visible: false, count: 0 },
+  { id: 42, categoryName: "Витрина", name: "Куринный грутка оващами", image: "/src/assets/tbonebaranina.jpg", price: "45000", time: "20 мин", visible: false, count: 0 },
+  { id: 43, categoryName: "Витрина", name: "Кофте друм", image: "/src/assets/tbonebaranina.jpg", price: "95000", time: "20 мин", visible: false, count: 0 },
+  { id: 44, categoryName: "Витрина", name: "Даллас", image: "/src/assets/tbonebaranina.jpg", price: "95000", time: "20 мин", visible: false, count: 0 },
+  { id: 45, categoryName: "Витрина", name: "Говяжий шашлык", image: "/src/assets/shashlik.jpg", price: "27000", time: "20 мин", visible: false, count: 0 },
+  { id: 46, categoryName: "Витрина", name: "Барбаре", image: "/src/assets/tbonebaranina.jpg", price: "100000", time: "20 мин", visible: false, count: 0 },
+  { id: 47, categoryName: "Витрина", name: "Антрекот", image: "/src/assets/tbonebaranina.jpg", price: "100000", time: "20 мин", visible: false, count: 0 },
+  { id: 48, categoryName: "Витрина", name: "Т-Боне", image: "/src/assets/tbonebaranina.jpg", price: "95000", time: "20 мин", visible: false, count: 0 },
+  { id: 49, categoryName: "Витрина", name: "Т-Боне Баранина", image: "/src/assets/tbonebaranina.jpg", price: "100000", time: "20 мин", visible: false, count: 0 },
+  { id: 50, categoryName: "Витрина", name: "Бон-филе", image: "/src/assets/tbonebaranina.jpg", price: "160000", time: "20 мин", visible: false, count: 0 },
+  { id: 51, categoryName: "Милк Шейк", name: "Сникерс шейк", image: "/src/assets/snikerssheyk.jpeg", price: "25000", time: "20 мин", visible: false, count: 0 },
+  { id: 52, categoryName: "Милк Шейк", name: "Банановый шейк", image: "/src/assets/bananoviysheyk.jpeg", price: "25000", time: "20 мин", visible: false, count: 0 },
+  { id: 53, categoryName: "Салаты", name: "Аччик-чучук", image: "/src/assets/achchiqchuchuk.jpeg", price: "20000", time: "20 мин", visible: false, count: 0 },
+  { id: 54, categoryName: "Салаты", name: "Мужской каприз", image: "/src/assets/mujskoykapriz.jpeg", price: "39000", time: "20 мин", visible: false, count: 0 },
+  { id: 55, categoryName: "Десерт", name: "Вафли микс", image: "/src/assets/vaflimiks.jpeg", price: "60000", time: "20 мин", visible: false, count: 0 },
+  { id: 56, categoryName: "Десерт", name: "Чизкейк", image: "/src/assets/chizkeyk.jpeg", price: "32000", time: "20 мин", visible: false, count: 0 },
+  { id: 57, categoryName: "Хлеб", name: "Нон ассорти", image: "/src/assets/nonassorti.jpeg", price: "19000", time: "20 мин", visible: false, count: 0 },
+  { id: 58, categoryName: "Хлеб", name: "Патир", image: "/src/assets/patir.jpeg", price: "14000", time: "20 мин", visible: false, count: 0 }
+];
 
 export default childFoodsList;

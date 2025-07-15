@@ -49,7 +49,7 @@
     {
       name:"Хлеб и Чай",
       foodsList:[
-        {title:"Хлеб",image:"src/assets/xlebassorty.jpg",smallFoods:"Нон ассорти, Патир, Анкара нон, Турк нон, Лимон 1 шт."},
+        {title:"Хлеб",image:"src/assets/nonassorti.jpeg",smallFoods:"Нон ассорти, Патир, Анкара нон, Турк нон, Лимон 1 шт."},
         {title:"Чай",image:"src/assets/tea.jpg",smallFoods:"Кук чай, Кора чай, Лимон чай кук, Лимон чай кора, Бардак чай чайник, Бардак чай."},
       ]
     }
