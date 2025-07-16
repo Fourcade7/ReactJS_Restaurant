@@ -9,19 +9,21 @@ import { CategoryScreen } from "./categoryScreen";
 import categoryList from "../repository/categoriesRepository";
 import { FoodsScreen } from "../foodScreen/foodsScreen";
 import childFoodsList from "../repository/foodsRepository";
-import { useNavigate } from "react-router-dom";
+//import { useNavigate } from "react-router-dom";
+import { OrderScreen } from "../orderScreen/orderScreen";
 
 
 
 function HomeScreen() {
 
   
-  const navigate=useNavigate();
+  //const navigate=useNavigate();
 
   const [active,setActive]=useState(0);
   const [childFoodList,setChildFoodList]=useState(childFoodsList);
   const [categoryName,setCategoryName]=useState("");
   const [orderList,setOrderList]=useState([]);
+  const [visibleOrderScreen,setVisibleOrderScreen]=useState(false);
 
   
 
@@ -35,7 +37,7 @@ function HomeScreen() {
 
         <div className="position-relative d-inline-block">
          <img src="/src/assets/mainimage.png" class="img-fluid w-100" alt="..."></img>
-         {categoryName==="1" && 
+         {categoryName==="nothing for code saved" && 
          <Button
          onClick={()=>{         
           setCategoryName("");
@@ -57,6 +59,7 @@ function HomeScreen() {
                   onClick={()=>{         
                     setCategoryName("");
                     setChildFoodList(childFoodsList);
+                    setVisibleOrderScreen(false);
                   }} 
                   variant="warning" 
                   className="rounded-circle">
@@ -88,8 +91,9 @@ function HomeScreen() {
                     setActive(index);
                     setCategoryName("");
                     setChildFoodList(childFoodsList);
+                    setVisibleOrderScreen(false);
                   }}
-                   className={`btn btn${index==active ? ``:`-outline`}-secondary border-2 py-1`}>{item.name}                  
+                  className={`btn btn${index==active ? ``:`-outline`}-secondary border-2 py-1`}>{item.name}                  
                    
                    </button></Col>
                 ))
@@ -106,10 +110,12 @@ function HomeScreen() {
             </InputGroup>
 
 
-          {categoryName ? 
+        {
+          visibleOrderScreen ? <OrderScreen orderList={orderList}></OrderScreen> :
+          categoryName ? 
           <FoodsScreen 
                 clickablePlus={(index)=>{
-                  const updatedList=[...childFoodList];
+                    const updatedList=[...childFoodList];
                     updatedList[index].count+=1;
                      
                     setChildFoodList(updatedList);
@@ -117,9 +123,9 @@ function HomeScreen() {
                     //order
 
 
-                    const orderlist=[...orderList];
-                    orderlist.push(updatedList[index]);
-                    setOrderList(orderlist);
+                    const orderListCopy=[...orderList];
+                    orderListCopy.push(updatedList[index]);
+                    setOrderList(orderListCopy);
                                      
 
 
@@ -132,26 +138,25 @@ function HomeScreen() {
                     //order
                     const orderListCopy=[...orderList];
                     const foundIndex = orderListCopy.findIndex(item => item.id === updatedList[index].id);
-                    orderListCopy.splice(foundIndex,1)
+                    orderListCopy.splice(foundIndex,1);
                     setOrderList(orderListCopy);
                     
                 }}
 
-               addButtonEvent={(event,index)=>{
-                
+               addButtonEvent={(event,index)=>{                
                    if(event==1){
                           const updatedList=[...childFoodList];
                           updatedList[index].count+=1;
-                            const orderlist=[...orderList];
-                            orderlist.push(updatedList[index]);
-                            setOrderList(orderlist);                            
+                            const orderListCopy=[...orderList];
+                            orderListCopy.push(updatedList[index]);
+                            setOrderList(orderListCopy);                            
                     }
                }} 
           
                childFoodList={childFoodList}>
            </FoodsScreen>   
            :
-            <CategoryScreen 
+           <CategoryScreen 
             clickable={(categoryname)=>{
               console.log(categoryname);
               setCategoryName(categoryname);
@@ -162,7 +167,7 @@ function HomeScreen() {
             }}
             category={categoryList[active]}>              
            </CategoryScreen>  
-         }
+        }
 
 
         
@@ -170,12 +175,13 @@ function HomeScreen() {
         
 
          <div className="d-flex sticky-bottom sticky-top mt-3 mb-3">
-            {categoryName && 
+            {(categoryName || visibleOrderScreen)  &&
             <div className="col-2 d-grid">
             <Button 
               onClick={()=>{
                 setCategoryName("");
                 setChildFoodList(childFoodsList);
+                setVisibleOrderScreen(false);
               }} 
               variant="warning"
               className="">
@@ -188,23 +194,14 @@ function HomeScreen() {
             <Button
             
             onClick={()=>{
-              navigate("/order",{state:orderList});
+              //navigate("/order",{state:orderList});
+              setVisibleOrderScreen(true);
+              window.scrollTo(0,200); // sahifani tepaga olib boradi
             }}
             variant="warning" className="">Мои Закази <Badge bg="danger">{orderList.length}</Badge></Button>
             </div>
          </div>
 
-        
-
-
-
-
-
-
-
-
-              
-          
 
           </div> 
        </div> 
