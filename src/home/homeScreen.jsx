@@ -1,79 +1,33 @@
-
-
-import { Badge, Button, Col, Form, Row} from "react-bootstrap"
-import InputGroup from 'react-bootstrap/InputGroup';
-import Card from 'react-bootstrap/Card';
-
+import { Badge, Button, Col, Form, Row, InputGroup } from "react-bootstrap";
 import { useState } from "react";
 import { CategoryScreen } from "./categoryScreen";
 import categoryList from "../repository/categoriesRepository";
 import { FoodsScreen } from "../foodScreen/foodsScreen";
 import childFoodsList from "../repository/foodsRepository";
-//import { useNavigate } from "react-router-dom";
 import { OrderScreen } from "../orderScreen/orderScreen";
 
-
-
 function HomeScreen() {
-
-  
-  //const navigate=useNavigate();
-
-  const [active,setActive]=useState(0);
-  const [childFoodList,setChildFoodList]=useState(childFoodsList);
-  const [categoryName,setCategoryName]=useState("");
-  const [orderList,setOrderList]=useState([]);
-  const [visibleOrderScreen,setVisibleOrderScreen]=useState(false);
-
-  
-
-  
+  const [active, setActive] = useState(0);
+  const [childFoodList, setChildFoodList] = useState(childFoodsList);
+  const [categoryName, setCategoryName] = useState("");
+  const [orderList, setOrderList] = useState([]);
+  const [visibleOrderScreen, setVisibleOrderScreen] = useState(false);
 
   return (
-    <div  className="container d-flex  align-items-center justify-content-center">
-
-     
-       <div  style={{ width: "450px" }}>
-
+    <div className="container d-flex align-items-center justify-content-center">
+      <div style={{ width: "450px" }}>
+        {/* Main image */}
         <div className="position-relative d-inline-block">
-         <img src="/src/assets/mainimage.png" class="img-fluid w-100" alt="..."></img>
-         {categoryName==="nothing for code saved" && 
-         <Button
-         onClick={()=>{         
-          setCategoryName("");
-          setChildFoodList(childFoodsList);
-        }} 
-         variant="warning" 
-         className="position-absolute top-0 start-0 m-2 rounded-circle">
-            <img src="/src/assets/arrow.png" width={15} height={15} alt="" />
-          </Button>
-        }    
-        </div>  
+          <img src="/src/assets/mainimage.png" className="img-fluid w-100" alt="..." />
+        </div>
 
-          
-         <div className="py-5 px-3 rounded rounded-top-5" style={{marginTop:-25, backgroundColor: "#181818"}}> 
-         
-           {categoryName && 
-              <div className="mb-3 sticky-top py-2">
-                  <Button
-                  onClick={()=>{         
-                    setCategoryName("");
-                    setChildFoodList(childFoodsList);
-                    setVisibleOrderScreen(false);
-                  }} 
-                  variant="warning" 
-                  className="rounded-circle">
-                      <img src="/src/assets/arrow.png" width={15} height={15} alt="" />
-                    </Button>
-              </div>
-            }
-         
-          <h5 >LIDERANT RESTAURANT</h5> 
+        {/* Content box */}
+        <div className="py-5 px-3 rounded-top-5" style={{ marginTop: -25, backgroundColor: "#181818" }}>
+          <h5>LIDERANT RESTAURANT</h5>
           <div className="d-flex align-items-center">
             <img src="/src/assets/maps-and-flags.png" width={15} height={15} alt="" />
             <small className="text-secondary ms-1">UZ Karakalpakstan Beruniy region</small>
           </div>
-
           <div className="d-flex align-items-center">
             <img src="/src/assets/telephone.png" width={15} height={15} alt="" />
             <small className="text-secondary ms-1">976514000</small>
@@ -81,189 +35,130 @@ function HomeScreen() {
             <small className="text-secondary ms-1">instagram</small>
           </div>
 
-
-            <Row className="row-cols-auto mt-4 g-2">               
-               {
-                categoryList.map((item,index)=>(
-                   <Col>
-                   <button  
-                   onClick={()=>{
+          {/* Category buttons */}
+          <Row className="row-cols-auto mt-4 g-2">
+            {categoryList.map((item, index) => (
+              <Col key={item.id}>
+                <button
+                  onClick={() => {
                     setActive(index);
                     setCategoryName("");
                     setChildFoodList(childFoodsList);
                     setVisibleOrderScreen(false);
                   }}
-                  className={`btn btn${index==active ? ``:`-outline`}-secondary border-2 py-1`}>{item.name}                  
-                   
-                   </button></Col>
-                ))
-               }
-            </Row>
+                  className={`btn btn${index === active ? "" : "-outline"}-secondary border-2 py-1`}
+                >
+                  {item.name}
+                </button>
+              </Col>
+            ))}
+          </Row>
 
-           
-            
-           
-           
-           <InputGroup className="mt-4">
-                <Form.Control className="text-secondary" type="text" placeholder="Поиск..." />
-                <InputGroup.Text > <img className="" src="/src/assets/magnifier.png" width={15} height={15} alt="" /></InputGroup.Text>
-            </InputGroup>
+          {/* Search */}
+          <InputGroup className="mt-4">
+            <Form.Control className="text-secondary" type="text" placeholder="Поиск..." />
+            <InputGroup.Text>
+              <img src="/src/assets/magnifier.png" width={15} height={15} alt="" />
+            </InputGroup.Text>
+          </InputGroup>
 
+          {/* Conditional rendering */}
+          {visibleOrderScreen ? (
+            <OrderScreen
+              orderList={orderList}
+              clickablePlus={(id) => {
+                const copy = [...orderList];
+                const index = copy.findIndex((item) => item.id === id);
+                if (index !== -1) {
+                  copy[index].count += 1;
+                  setOrderList(copy);
+                }
+              }}
+              clickableMinus={(id) => {
+                const copy = [...orderList];
+                const index = copy.findIndex((item) => item.id === id);
+                if (index !== -1) {
+                  if (copy[index].count > 1) {
+                    copy[index].count -= 1;
+                  } else {
+                    copy.splice(index, 1);
+                  }
+                  setOrderList(copy);
+                }
+              }}
+            />
+          ) : categoryName ? (
+            <FoodsScreen
+              childFoodList={childFoodList}
+              clickablePlus={(index) => {
+                const updated = [...childFoodList];
+                updated[index].count += 1;
+                setChildFoodList(updated);
+                setOrderList([...orderList, updated[index]]);
+              }}
+              clickableMinus={(index) => {
+                const updated = [...childFoodList];
+                updated[index].count -= 1;
+                setChildFoodList(updated);
 
-        {
-          visibleOrderScreen ? 
-          <OrderScreen 
-           clickablePlus={(index)=>{   
-            
-                    setOrderList(orderList);
+                const copy = [...orderList];
+                const foundIndex = copy.findIndex((item) => item.id === updated[index].id);
+                if (foundIndex !== -1) {
+                  copy.splice(foundIndex, 1);
+                  setOrderList(copy);
+                }
+              }}
+              addButtonEvent={(event, index) => {
+                if (event === 1) {
+                  const updated = [...childFoodList];
+                  updated[index].count += 1;
+                  setOrderList([...orderList, updated[index]]);
+                }
+              }}
+            />
+          ) : (
+            <CategoryScreen
+              category={categoryList[active]}
+              clickable={(name) => {
+                setCategoryName(name);
+                setChildFoodList(childFoodsList.filter((item) => item.categoryName === name));
+                window.scrollTo(0, 200);
+              }}
+            />
+          )}
 
-                    //ORDER
-                    const orderListCopy=[...orderList];
-                    orderListCopy[index].count+=1;
-                    orderListCopy.push(orderListCopy[index]);                 
-                    
-                     
-                    const filteredOrderList=[];
-                    orderListCopy.map((item)=>{
-                        let findedElement=filteredOrderList.find(itemf => itemf==item)
-                        if(!findedElement){
-                            filteredOrderList.push(item);
-                        }
-
-                    });
-                   
-                    setOrderList(filteredOrderList);
-
+          {/* Bottom button */}
+          <div className="d-flex sticky-bottom sticky-top mt-3 mb-3">
+            {(categoryName || visibleOrderScreen) && (
+              <div className="col-2 d-grid">
+                <Button
+                  onClick={() => {
+                    setCategoryName("");
+                    setChildFoodList(childFoodsList);
+                    setVisibleOrderScreen(false);
+                  }}
+                  variant="warning"
+                >
+                  <img src="/src/assets/arrow.png" width={15} height={15} alt="" />
+                </Button>
+              </div>
+            )}
+            <div className="col d-grid mx-2">
+              <Button
+                onClick={() => {
+                  setVisibleOrderScreen(true);
+                  window.scrollTo(0, 200);
                 }}
-
-                 clickableMinus={(index)=>{
-                  setOrderList(orderList);
-                   
-                    const orderListCopy=[...orderList];
-                    const filteredOrderList=[];
-
-                    if(orderListCopy[index].count>1){
-                      orderListCopy[index].count-=1; 
-                        orderListCopy.map((item)=>{
-                            let findedElement=filteredOrderList.find(itemf => itemf==item)
-                            if(!findedElement){
-                                filteredOrderList.push(item);
-                            }
-
-                        });
-                        
-                        setOrderList(filteredOrderList);
-
-                    } else{
-
-                       const foundIndex = orderListCopy.findIndex(item => item.id === orderList[index].id);
-                       orderListCopy.splice(foundIndex,1);
-                       setOrderList(orderListCopy);
-                    }
-                    
-                   
-                    
-
-
-
-                }}
-          orderList={orderList}></OrderScreen> :
-          categoryName ? 
-          <FoodsScreen 
-                clickablePlus={(index)=>{
-                    const updatedList=[...childFoodList];
-                    updatedList[index].count+=1;
-                     
-                    setChildFoodList(updatedList);
-                    //order
-
-                    const orderListCopy=[...orderList];
-                    orderListCopy.push(updatedList[index]);
-                    setOrderList(orderListCopy);
-                                     
-
-
-                }}
-
-                clickableMinus={(index)=>{
-                    const updatedList=[...childFoodList];
-                    updatedList[index].count-=1;
-                    setChildFoodList(updatedList);
-                    //order
-                    const orderListCopy=[...orderList];
-                    const foundIndex = orderListCopy.findIndex(item => item.id === updatedList[index].id);
-                    orderListCopy.splice(foundIndex,1);
-                    setOrderList(orderListCopy);
-                    
-                }}
-
-               addButtonEvent={(event,index)=>{                
-                   if(event==1){
-                          const updatedList=[...childFoodList];
-                          updatedList[index].count+=1;
-                          const orderListCopy=[...orderList];
-                          orderListCopy.push(updatedList[index]);
-                          setOrderList(orderListCopy);                            
-                    }
-               }} 
-          
-               childFoodList={childFoodList}>
-           </FoodsScreen>   
-           :
-           <CategoryScreen 
-            clickable={(categoryname)=>{
-              console.log(categoryname);
-              setCategoryName(categoryname);
-              setChildFoodList(childFoodList.filter(item=> (item.categoryName==categoryname)));
-              window.scrollTo(0,200); // sahifani tepaga olib boradi
-
-
-            }}
-            category={categoryList[active]}>              
-           </CategoryScreen>  
-        }
-
-
-        
-          
-        
-
-         <div className="d-flex sticky-bottom sticky-top mt-3 mb-3">
-            {(categoryName || visibleOrderScreen)  &&
-            <div className="col-2 d-grid">
-            <Button 
-              onClick={()=>{
-                setCategoryName("");
-                setChildFoodList(childFoodsList);
-                setVisibleOrderScreen(false);
-              }} 
-              variant="warning"
-              className="">
-              <img src="/src/assets/arrow.png" width={15} height={15} alt="" />
-              <div></div>
+                variant="warning"
+              >
+                Мои Закази <Badge bg="danger">{orderList.length}</Badge>
               </Button>
             </div>
-            }
-            <div className="col d-grid mx-2">
-            <Button
-            
-            onClick={()=>{
-              //navigate("/order",{state:orderList});
-              setVisibleOrderScreen(true);
-              window.scrollTo(0,200); // sahifani tepaga olib boradi
-            }}
-            variant="warning" className="">Мои Закази <Badge bg="danger">{orderList.length}</Badge></Button>
-            </div>
-         </div>
-
-
-          </div> 
-       </div> 
-       
-      
-      
+          </div>
+        </div>
+      </div>
     </div>
-  )
+  );
 }
 
-export {HomeScreen}
+export { HomeScreen };
