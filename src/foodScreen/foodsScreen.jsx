@@ -9,7 +9,9 @@ import { useState } from "react";
 function FoodsScreen(props){
 
     const [childFoodsList,setChildFoodsList]=useState(props.childFoodList)
-      const [layout,setLayout]=useState(true);
+    const [layout,setLayout]=useState(true);
+
+   
 
    
 
@@ -37,7 +39,7 @@ function FoodsScreen(props){
                                 <Col>
                                     <Row className="row-cols-auto g-1">
                                         <Col><img src="/src/assets/moneyuzs.png" width={25} height={25} alt="" /></Col>
-                                        <Col><small className="text-secondary">{item.price} UZS</small></Col>
+                                        <Col><small className="text-secondary">{Number(item.price).toLocaleString("uz-UZ")} UZS</small></Col>
                                     </Row>
                                 </Col>
                                 <Col>

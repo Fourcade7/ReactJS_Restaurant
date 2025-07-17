@@ -111,7 +111,63 @@ function HomeScreen() {
 
 
         {
-          visibleOrderScreen ? <OrderScreen orderList={orderList}></OrderScreen> :
+          visibleOrderScreen ? 
+          <OrderScreen 
+           clickablePlus={(index)=>{   
+            
+                    setOrderList(orderList);
+
+                    //ORDER
+                    const orderListCopy=[...orderList];
+                    orderListCopy[index].count+=1;
+                    orderListCopy.push(orderListCopy[index]);                 
+                    
+                     
+                    const filteredOrderList=[];
+                    orderListCopy.map((item)=>{
+                        let findedElement=filteredOrderList.find(itemf => itemf==item)
+                        if(!findedElement){
+                            filteredOrderList.push(item);
+                        }
+
+                    });
+                   
+                    setOrderList(filteredOrderList);
+
+                }}
+
+                 clickableMinus={(index)=>{
+                  setOrderList(orderList);
+                   
+                    const orderListCopy=[...orderList];
+                    const filteredOrderList=[];
+
+                    if(orderListCopy[index].count>1){
+                      orderListCopy[index].count-=1; 
+                        orderListCopy.map((item)=>{
+                            let findedElement=filteredOrderList.find(itemf => itemf==item)
+                            if(!findedElement){
+                                filteredOrderList.push(item);
+                            }
+
+                        });
+                        
+                        setOrderList(filteredOrderList);
+
+                    } else{
+
+                       const foundIndex = orderListCopy.findIndex(item => item.id === orderList[index].id);
+                       orderListCopy.splice(foundIndex,1);
+                       setOrderList(orderListCopy);
+                    }
+                    
+                   
+                    
+
+
+
+                }}
+          orderList={orderList}></OrderScreen> :
           categoryName ? 
           <FoodsScreen 
                 clickablePlus={(index)=>{
@@ -119,9 +175,7 @@ function HomeScreen() {
                     updatedList[index].count+=1;
                      
                     setChildFoodList(updatedList);
-
                     //order
-
 
                     const orderListCopy=[...orderList];
                     orderListCopy.push(updatedList[index]);
@@ -132,7 +186,7 @@ function HomeScreen() {
                 }}
 
                 clickableMinus={(index)=>{
-                  const updatedList=[...childFoodList];
+                    const updatedList=[...childFoodList];
                     updatedList[index].count-=1;
                     setChildFoodList(updatedList);
                     //order
@@ -147,9 +201,9 @@ function HomeScreen() {
                    if(event==1){
                           const updatedList=[...childFoodList];
                           updatedList[index].count+=1;
-                            const orderListCopy=[...orderList];
-                            orderListCopy.push(updatedList[index]);
-                            setOrderList(orderListCopy);                            
+                          const orderListCopy=[...orderList];
+                          orderListCopy.push(updatedList[index]);
+                          setOrderList(orderListCopy);                            
                     }
                }} 
           
